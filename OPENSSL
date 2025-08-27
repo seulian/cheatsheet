@@ -69,11 +69,15 @@
 ## Create new certificate
 | 'openssl req -new -x509 -sha256 -days 3650 -key private/example.local.key.pem -out inter-ca.cert.pem'
 
-## Check validity of RSA key certificate
-| 'openssl rsa -check -noout -in private/example.local.key.pem'
+## Check validity of RSA key certificateopenssl ca -config openssl.cnf -days 365 -notext \
+-in csr/lab.example.com.csr.pem \
+-out certs/lab.example.com.cert.pem| 'openssl rsa -check -noout -in private/example.local.key.pem'
 
 ## View the certificate
 | 'openssl x509 -noout -text -in inter-ca.cert.pem'
 
 ## Check if the HASH from the Cert and the Private Key match
 | 'openssl x509 -noout -modulus -in inter-ca.cert.pem | openssl sha256   &&   openssl rsa -noout -modulus -in example.local.key.pem | openssl sha256'
+
+## Renewing a Certificate
+| 'openssl ca -config openssl.cnf -days 365 -notext -in csr/example.local.csr.pem -out certs/example.local.cert.pem'
