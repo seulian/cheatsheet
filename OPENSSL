@@ -58,3 +58,11 @@
 | `openssl rand -base64 -out <file> 32` | Generate a random base64 string and save it to a file |
 | `openssl rand -out <file> 32` | Generate a random binary string and save it to a file |
 | `openssl rand -hex 32` | Generate a random hex string |
+
+
+## Create new certificate
+| 'openssl req -new -x509 -sha256 -days 3650 -key ca-key.pem -out inter-ca.cert.pem'
+
+## View the certificate
+| 'openssl x509 -noout -text -in inter-ca.cert.pem'
+
